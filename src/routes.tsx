@@ -8,6 +8,7 @@ import { Orders } from './pages/app/orders/orders'
 import { SignIn } from './pages/auth/sign-in'
 import { Report } from './pages/auth/report'
 import { SignUp } from './pages/auth/sign-up'
+import { LaudoView } from './pages/auth/laudo-view'
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
 
       {
         path: '/reports/:id',
-        element: <Report />,
+        element: <LaudoView />,
       },
 
       {
