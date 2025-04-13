@@ -29,7 +29,7 @@ export function SignIn() {
   async function handleSearch(data: SignInData) {
     try {
       const response = await fetch(
-        `http://localhost:3333/reports/${data.reportId}`,
+        `https://labmoura-api-production-c06f.up.railway.app/reports/${data.reportId}`,
       )
       const result = await response.json()
 

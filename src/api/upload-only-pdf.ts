@@ -3,10 +3,13 @@ export async function uploadOnlyPdf(file: File) {
   const formData = new FormData()
   formData.append('file', file)
 
-  const response = await fetch('http://localhost:3333/reports/upload-pdf', {
-    method: 'POST',
-    body: formData,
-  })
+  const response = await fetch(
+    'https://labmoura-api-production-c06f.up.railway.app/reports/upload-pdf',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  )
 
   if (!response.ok) {
     throw new Error('Falha ao enviar PDF')

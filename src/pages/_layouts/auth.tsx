@@ -19,7 +19,7 @@ export function AuthLayout() {
               className="h-14 w-auto object-contain"
             />
             <span className="text-xs text-muted-foreground">
-              iaki.com.br &copy; {new Date().getFullYear()}
+              Desenvolvido por: iaki.com.br &copy; {new Date().getFullYear()}
             </span>
           </div>
         </div>

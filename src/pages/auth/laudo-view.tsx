@@ -15,12 +15,14 @@ export function LaudoView() {
   const [report, setReport] = useState<Report | null>(null)
   const [loading, setLoading] = useState(true)
 
-  const backendBaseURL = 'http://localhost:3333'
+  const backendBaseURL = 'https://labmoura-api-production-c06f.up.railway.app/'
 
   useEffect(() => {
     async function fetchLaudo() {
       try {
-        const response = await fetch(`http://localhost:3333/reports/${id}`)
+        const response = await fetch(
+          `https://labmoura-api-production-c06f.up.railway.app/reports/${id}`,
+        )
         const data = await response.json()
         setReport(data.report)
       } catch {
