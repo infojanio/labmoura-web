@@ -1,9 +1,7 @@
 {
   "build": {
-    "command": "npm run build"
-  },
-  "deploy": {
-    "startCommand": "npx serve -s dist",
-    "healthcheckPath": "/"
+    "builder": "npm",
+    "buildCommand": "npm run build",
+    "startCommand": "npm run start"
   }
 }

@@ -12,8 +12,8 @@ import { queryClient } from './lib/react-query'
 export function App() {
   return (
     <HelmetProvider>
-      <ThemeProvider defaultTheme="dark" storageKey="pizzashop-theme">
-        <Helmet titleTemplate="%s | labmoura.com.br" />
+      <ThemeProvider defaultTheme="light" storageKey="pizzashop-theme">
+        <Helmet titleTemplate="%s | www.labmoura.com.br" />
 
         <Toaster richColors />
 
