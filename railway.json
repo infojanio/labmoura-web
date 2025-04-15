@@ -1,8 +1,0 @@
-{
-  "build": {
-    "builder": "vite"
-  },
-  "deploy": {
-    "startCommand": "vite preview --port $PORT"
-  }
-}
