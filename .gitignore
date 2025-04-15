@@ -1,3 +1,33 @@
-node_modules
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Diretórios de build
+dist/
+build/
+
+# Arquivos de ambiente
+.env
+.env.*.local
 .env.local
-.build
+.env.development
+.env.production
+
+# Railway
+railway.json
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# IDEs e editores
+.vscode/
+.idea/
+
+# Arquivos de log
+*.log
+
+# Cache do Vite
+.cache/
