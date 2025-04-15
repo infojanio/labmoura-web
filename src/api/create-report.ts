@@ -25,6 +25,7 @@ export async function createReport(payload: CreateReportPayload) {
   const response = await api.post('/reports', {
     ...payload,
     entryDate: new Date(payload.entryDate).toISOString(),
+    collectionDate: new Date(payload.collectionDate).toISOString(),
   })
 
   return response.data
