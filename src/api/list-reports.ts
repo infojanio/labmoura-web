@@ -14,5 +14,6 @@ export async function listReports(params?: {
   search?: string
 }): Promise<ReportListItem[]> {
   const response = await api.get('/reports', { params })
+
   return response.data
 }

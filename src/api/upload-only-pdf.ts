@@ -4,7 +4,7 @@ export async function uploadOnlyPdf(file: File) {
   formData.append('file', file)
 
   const response = await fetch(
-    'https://labmoura-api-production-c06f.up.railway.app/reports/upload-pdf',
+    'https://labmoura-api-production-9089.up.railway.app/reports/upload-pdf',
     {
       method: 'POST',
       body: formData,
