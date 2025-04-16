@@ -22,7 +22,7 @@ export function ReportListPage() {
     if (endDate) params.append('endDate', endDate)
 
     const res = await fetch(
-      `https://labmoura-api-production.up.railway.app/reports?${params.toString()}`,
+      `https://labmoura-api-production.up.railway.app/reports${params.toString()}`,
     )
 
     const data = await res.json()
