@@ -12,16 +12,24 @@ interface Report {
 
 export function ReportListPage() {
   const [reports, setReports] = useState<Report[]>([])
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
   const navigate = useNavigate()
 
+  async function fetchReports() {
+    const params = new URLSearchParams()
+    if (startDate) params.append('startDate', startDate)
+    if (endDate) params.append('endDate', endDate)
+
+    const res = await fetch(
+      `https://labmoura-api-production.up.railway.app/reports?${params.toString()}`,
+    )
+
+    const data = await res.json()
+    setReports(data.reports)
+  }
+
   useEffect(() => {
-    async function fetchReports() {
-      const res = await fetch(
-        'https://labmoura-api-production.up.railway.app/reports',
-      )
-      const data = await res.json()
-      setReports(data)
-    }
     fetchReports()
   }, [])
 
@@ -34,6 +42,30 @@ export function ReportListPage() {
           <Button variant="outline" onClick={() => navigate(-1)}>
             ← Voltar
           </Button>
+        </div>
+
+        <div className="flex flex-col sm:flex-row sm:items-end gap-4 mb-6">
+          <div className="flex flex-col">
+            <label className="text-sm mb-1">Data Inicial</label>
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="border rounded px-3 py-2 text-sm"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="text-sm mb-1">Data Final</label>
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="border rounded px-3 py-2 text-sm"
+            />
+          </div>
+
+          <Button onClick={fetchReports}>🔍 Buscar</Button>
         </div>
 
         {reports.length === 0 ? (
