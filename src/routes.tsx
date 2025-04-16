@@ -6,6 +6,7 @@ import { NotFound } from './pages/404'
 import { SignIn } from './pages/auth/sign-in'
 import { SignUp } from './pages/auth/sign-up'
 import { LaudoView } from './pages/auth/laudo-view'
+import { ReportListPage } from './pages/auth/list-reports'
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,11 @@ export const router = createBrowserRouter([
       {
         path: '/reports/:id',
         element: <LaudoView />,
+      },
+
+      {
+        path: '/reports',
+        element: <ReportListPage />,
       },
 
       {

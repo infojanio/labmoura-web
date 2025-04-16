@@ -44,6 +44,12 @@ export function SignUp() {
         },
       })
 
+      // Após envio do PDF com sucesso:
+      toast.success('Laudo enviado com sucesso! Redirecionando...')
+      setTimeout(() => {
+        navigate('/reports') // ✅ redireciona para a listagem
+      }, 2000)
+
       setPdfFile(null)
     } catch (error) {
       toast.error('Erro ao enviar o PDF.')
