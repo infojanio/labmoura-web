@@ -44,12 +44,6 @@ export function SignUp() {
         },
       })
 
-      // Após envio do PDF com sucesso:
-      toast.success('Laudo enviado com sucesso! Redirecionando...')
-      setTimeout(() => {
-        navigate('/reports') // ✅ redireciona para a listagem
-      }, 2000)
-
       setPdfFile(null)
     } catch (error) {
       toast.error('Erro ao enviar o PDF.')
@@ -114,6 +108,12 @@ export function SignUp() {
           >
             {isSubmitting ? 'Enviando...' : 'Salvar Laudo'}
           </Button>
+
+          <Link to="/reports/list">
+            <Button variant="outline" className="w-full mt-2">
+              📄 Ver todos os laudos
+            </Button>
+          </Link>
 
           <p className="px-6 text-center text-sm text-muted-foreground">
             Já possui uma chave?{' '}
