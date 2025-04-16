@@ -109,7 +109,7 @@ export function SignUp() {
             {isSubmitting ? 'Enviando...' : 'Salvar Laudo'}
           </Button>
 
-          <Link to="/reports/list">
+          <Link to="/reports">
             <Button variant="outline" className="w-full mt-2">
               📄 Ver todos os laudos
             </Button>

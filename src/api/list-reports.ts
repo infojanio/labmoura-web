@@ -8,12 +8,11 @@ interface ReportListItem {
   createdAt: string
 }
 
+// src/api/list-reports.ts
 export async function listReports(params?: {
-  page?: number
-  limit?: number
-  search?: string
-}): Promise<ReportListItem[]> {
+  startDate?: string
+  endDate?: string
+}) {
   const response = await api.get('/reports', { params })
-
-  return response.data
+  return response.data.reports
 }
