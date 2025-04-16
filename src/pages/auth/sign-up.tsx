@@ -24,7 +24,7 @@ export function SignUp() {
       formData.append('file', pdfFile)
 
       const response = await fetch(
-        'https://labmoura-api-production-c06f.up.railway.app/reports/upload-pdf',
+        'https://labmoura-api-production-9089.up.railway.app/reports/upload-pdf',
         {
           method: 'POST',
           body: formData,
@@ -63,7 +63,7 @@ export function SignUp() {
               Enviar Laudo em PDF
             </h1>
             <p className="text-sm text-muted-foreground">
-              Faça o upload do laudo em PDF para validação e assinatura digital.
+              Faça o upload do laudo em PDF para validação e assinatura digital!
             </p>
           </div>
 
