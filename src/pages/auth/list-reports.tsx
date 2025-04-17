@@ -18,15 +18,24 @@ export function ReportListPage() {
 
   async function fetchReports() {
     const params = new URLSearchParams()
+    const query = params.toString()
+
     if (startDate) params.append('startDate', startDate)
     if (endDate) params.append('endDate', endDate)
 
     const res = await fetch(
-      `https://labmoura-api-production.up.railway.app/reports${params.toString()}`,
+      `https://labmoura-api-production.up.railway.app/reports${
+        query ? `?${query}` : ''
+      }`,
     )
 
+    if (!res.ok) {
+      console.error('Erro ao buscar laudos:', res.status)
+      return
+    }
+
     const data = await res.json()
-    setReports(data.reports)
+    setReports(data.reports ?? [])
   }
 
   useEffect(() => {
