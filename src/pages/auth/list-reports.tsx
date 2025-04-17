@@ -21,11 +21,12 @@ export function ReportListPage() {
     if (startDate) params.append('startDate', startDate)
     if (endDate) params.append('endDate', endDate)
 
-    const res = await fetch(
-      `https://labmoura-api-production.up.railway.app/reports${
-        params.toString() ? `?${params.toString()}` : ''
-      }`,
-    )
+    //se não passar datas carrega todos os laudos
+    const url = `https://labmoura-api-production.up.railway.app/reports${
+      params.toString() ? `?${params.toString()}` : ''
+    }`
+
+    const res = await fetch(url)
 
     if (!res.ok) {
       console.error('Erro ao buscar laudos:', res.status)
