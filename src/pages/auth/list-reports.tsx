@@ -18,14 +18,12 @@ export function ReportListPage() {
 
   async function fetchReports() {
     const params = new URLSearchParams()
-    const query = params.toString()
-
     if (startDate) params.append('startDate', startDate)
     if (endDate) params.append('endDate', endDate)
 
     const res = await fetch(
       `https://labmoura-api-production.up.railway.app/reports${
-        query ? `?${query}` : ''
+        params.toString() ? `?${params.toString()}` : ''
       }`,
     )
 
