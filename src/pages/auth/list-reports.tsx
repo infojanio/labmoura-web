@@ -1,7 +1,6 @@
-// src/pages/reports/list-reports.tsx
-import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 
 interface Report {
@@ -14,32 +13,48 @@ export function ReportListPage() {
   const [reports, setReports] = useState<Report[]>([])
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   async function fetchReports() {
-    const params = new URLSearchParams()
-    if (startDate) params.append('startDate', startDate)
-    if (endDate) params.append('endDate', endDate)
+    try {
+      setLoading(true)
 
-    //se não passar datas carrega todos os laudos
-    const url = `https://labmoura-api-production.up.railway.app/reports${
-      params.toString() ? `?${params.toString()}` : ''
-    }`
+      const params = new URLSearchParams()
+      if (startDate) params.append('startDate', startDate)
+      if (endDate) params.append('endDate', endDate)
+      params.append('page', String(page))
+      params.append('perPage', '10') // Pode ajustar se quiser mais/menos por página
 
-    const res = await fetch(url)
+      const url = `https://labmoura-api-production.up.railway.app/reports${
+        params.toString() ? `?${params.toString()}` : ''
+      }`
 
-    if (!res.ok) {
-      console.error('Erro ao buscar laudos:', res.status)
-      return
+      const res = await fetch(url)
+      const data = await res.json()
+
+      setReports(data.reports || [])
+      setTotalPages(data.totalPages || 1)
+    } catch (error) {
+      console.error('Erro ao buscar laudos:', error)
+    } finally {
+      setLoading(false)
     }
-
-    const data = await res.json()
-    setReports(data.reports ?? [])
   }
 
   useEffect(() => {
     fetchReports()
-  }, [])
+  }, [page])
+
+  function handlePrevPage() {
+    setPage((prev) => Math.max(prev - 1, 1))
+  }
+
+  function handleNextPage() {
+    setPage((prev) => prev + 1)
+  }
 
   return (
     <>
@@ -73,41 +88,64 @@ export function ReportListPage() {
             />
           </div>
 
-          <Button onClick={fetchReports}>🔍 Buscar</Button>
+          <Button
+            onClick={() => {
+              setPage(1)
+              fetchReports()
+            }}
+          >
+            🔍 Buscar
+          </Button>
         </div>
 
-        {reports.length === 0 ? (
+        {loading ? (
+          <p className="text-sm text-gray-500">Carregando...</p>
+        ) : reports.length === 0 ? (
           <p className="text-sm text-gray-500">Nenhum laudo encontrado.</p>
         ) : (
-          <ul className="space-y-4">
-            {reports.map((report) => (
-              <li
-                key={report.id}
-                className="p-4 border rounded shadow-sm bg-white flex flex-col sm:flex-row sm:justify-between sm:items-center"
-              >
-                <div>
-                  <p className="text-sm">
-                    <strong>ID:</strong> {report.id}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    <strong>Data:</strong>{' '}
-                    {new Date(report.createdAt).toLocaleDateString()}
-                  </p>
-                </div>
+          <>
+            <ul className="space-y-4 mb-6">
+              {reports.map((report) => (
+                <li
+                  key={report.id}
+                  className="p-4 border rounded shadow-sm bg-white flex flex-col sm:flex-row sm:justify-between sm:items-center"
+                >
+                  <div>
+                    <p className="text-sm">
+                      <strong>ID:</strong> {report.id}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      <strong>Data:</strong>{' '}
+                      {new Date(report.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
 
-                {report.signedPdfUrl && (
-                  <a
-                    href={report.signedPdfUrl}
-                    className="mt-3 sm:mt-0 text-blue-600 hover:underline text-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    📄 Ver PDF
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
+                  {report.signedPdfUrl && (
+                    <a
+                      href={report.signedPdfUrl}
+                      className="mt-3 sm:mt-0 text-blue-600 hover:underline text-sm"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      📄 Ver PDF
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex justify-center gap-4">
+              <Button onClick={handlePrevPage} disabled={page === 1}>
+                ⬅ Anterior
+              </Button>
+              <span className="text-sm text-gray-700 self-center">
+                Página {page} de {totalPages}
+              </span>
+              <Button onClick={handleNextPage} disabled={page >= totalPages}>
+                Próxima ➡
+              </Button>
+            </div>
+          </>
         )}
       </div>
     </>
