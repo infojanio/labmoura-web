@@ -48,7 +48,8 @@ export function ReportListPage() {
 
   useEffect(() => {
     fetchReports()
-  }, []) // ← não dependa apenas do `page`
+    // sempre busca os dados se o componente montar ou mudar page/data
+  }, [page, startDate, endDate])
 
   function handlePrevPage() {
     setPage((prev) => Math.max(prev - 1, 1))
