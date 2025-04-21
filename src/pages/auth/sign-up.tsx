@@ -108,16 +108,11 @@ export function SignUp() {
             {isSubmitting ? 'Enviando...' : 'Salvar Laudo'}
           </Button>
 
-          <Button
-            variant="outline"
-            className="w-full mt-2"
-            onClick={() => {
-              navigate('/reports')
-              window.location.reload()
-            }}
-          >
-            📄 Ver todos os laudos
-          </Button>
+          <Link to="/reports">
+            <Button variant="outline" className="w-full mt-2">
+              📄 Ver todos os laudos
+            </Button>
+          </Link>
 
           <p className="px-6 text-center text-sm text-muted-foreground">
             Já possui uma chave?{' '}
