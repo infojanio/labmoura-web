@@ -9,6 +9,8 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 
+import { env } from '@/env'
+
 const signInSchema = z.object({
   reportId: z.string().min(1, 'Informe a chave do laudo'),
 })
@@ -29,7 +31,7 @@ export function SignIn() {
   async function handleSearch(data: SignInData) {
     try {
       const response = await fetch(
-        `https://labmoura-api-production-9089.up.railway.app/reports/${data.reportId}`,
+        `${env.VITE_API_URL}/reports/${data.reportId}`,
       )
       const result = await response.json()
 

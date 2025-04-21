@@ -6,6 +6,8 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 
+import { env } from '@/env'
+
 export function SignUp() {
   const navigate = useNavigate()
   const [pdfFile, setPdfFile] = useState<File | null>(null)
@@ -23,13 +25,10 @@ export function SignUp() {
       const formData = new FormData()
       formData.append('file', pdfFile)
 
-      const response = await fetch(
-        'https://labmoura-api-production-9089.up.railway.app/reports/upload-pdf',
-        {
-          method: 'POST',
-          body: formData,
-        },
-      )
+      const response = await fetch(`${env.VITE_API_URL}/reports/upload-pdf`, {
+        method: 'POST',
+        body: formData,
+      })
 
       if (!response.ok) {
         throw new Error('Erro ao enviar o PDF')

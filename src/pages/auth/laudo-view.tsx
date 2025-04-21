@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Button } from '@/components/ui/button'
 
+import { env } from '@/env'
+
 interface Report {
   id: string
   signedPdfUrl?: string
@@ -15,14 +17,12 @@ export function LaudoView() {
   const [report, setReport] = useState<Report | null>(null)
   const [loading, setLoading] = useState(true)
 
-  const backendBaseURL = 'https://labmoura-api-production-9089.up.railway.app'
+  //const backendBaseURL = 'https://labmoura-api-production-9089.up.railway.app'
 
   useEffect(() => {
     async function fetchLaudo() {
       try {
-        const response = await fetch(
-          `https://labmoura-api-production-9089.up.railway.app/reports/${id}`,
-        )
+        const response = await fetch(`${env.VITE_API_URL}/reports/${id}`)
         const data = await response.json()
         setReport(data.report)
       } catch {
@@ -54,7 +54,7 @@ export function LaudoView() {
         {report.signedPdfUrl && (
           <div className="mt-6">
             <a
-              href={`${backendBaseURL}/pdf/laudo-${report.id}.pdf`}
+              href={`${env.VITE_API_URL}/pdf/laudo-${report.id}.pdf`}
               target="_blank"
               rel="noopener noreferrer"
             >

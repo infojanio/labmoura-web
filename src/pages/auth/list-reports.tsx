@@ -2,6 +2,8 @@ import { Helmet } from 'react-helmet-async'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { env } from '@/env'
 
 interface Report {
   id: string
@@ -28,7 +30,7 @@ export function ReportListPage() {
       params.append('page', String(page))
       params.append('perPage', '10') // Pode ajustar se quiser mais/menos por página
 
-      const url = `https://labmoura-api-production.up.railway.app/reports${
+      const url = `${env.VITE_API_URL}/reports${
         params.toString() ? `?${params.toString()}` : ''
       }`
 
