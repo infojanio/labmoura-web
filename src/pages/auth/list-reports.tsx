@@ -48,7 +48,7 @@ export function ReportListPage() {
 
   useEffect(() => {
     fetchReports()
-  }, [page])
+  }, [page, startDate, endDate])
 
   function handlePrevPage() {
     setPage((prev) => Math.max(prev - 1, 1))
