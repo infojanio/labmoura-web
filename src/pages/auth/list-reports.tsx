@@ -34,7 +34,7 @@ export function ReportListPage() {
         params.toString() ? `?${params.toString()}` : ''
       }`
 
-      const res = await fetch(url)
+      const res = await fetch(url, { cache: 'no-cache' })
       const data = await res.json()
 
       setReports(data.reports || [])
@@ -48,7 +48,7 @@ export function ReportListPage() {
 
   useEffect(() => {
     fetchReports()
-  }, [page, startDate, endDate])
+  }, []) // ← não dependa apenas do `page`
 
   function handlePrevPage() {
     setPage((prev) => Math.max(prev - 1, 1))
