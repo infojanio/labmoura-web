@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
 import { env } from '@/env'
 
 interface Report {

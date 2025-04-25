@@ -7,6 +7,7 @@ import { SignIn } from './pages/auth/sign-in'
 import { SignUp } from './pages/auth/sign-up'
 import { LaudoView } from './pages/auth/laudo-view'
 import { ReportListPage } from './pages/auth/list-reports'
+import { WelcomePage } from './pages/welcome-page'
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
     element: <AuthLayout />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: '/', // 👈 Agora WelcomePage é a rota raiz
+        element: <WelcomePage />,
+      },
       {
         path: '/sign-in',
         element: <SignIn />,

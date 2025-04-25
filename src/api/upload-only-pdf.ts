@@ -1,12 +1,15 @@
 // src/api/upload-only-pdf.ts
 
+import { env } from '@/env'
+
 export async function uploadOnlyPdf(file: File) {
   const formData = new FormData()
   formData.append('file', file)
 
   try {
     const response = await fetch(
-      'https://labmoura-api-production-9089.up.railway.app/reports/upload-pdf',
+      `${env.VITE_API_URL}/reports/upload-pdf`,
+      //'https://labmoura-api-production-9089.up.railway.app/reports/upload-pdf',
       {
         method: 'POST',
         body: formData,
